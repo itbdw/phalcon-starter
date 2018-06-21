@@ -33,6 +33,7 @@ try {
     echo $application->handle()->getContent();
 } catch (\Exception $e) {
 
-    //todo 不能直接输出错误
-    echo $e->getMessage();
+    echo "Something wrong happened, but your data is safe.";
+
+    $application->logger->alert($e->getTraceAsString());
 }
