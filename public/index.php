@@ -33,6 +33,13 @@ try {
     echo $application->handle()->getContent();
 } catch (\Exception $e) {
 
+    if ($e instanceof \Phalcon\Mvc\Dispatcher\Exception) {
+        $application->response->setStatusCode(404);
+        $application->response->setContent("Url not exists");
+        $application->response->send();
+        return ;
+    }
+    
     $application->response->setStatusCode(503);
     $application->response->setContent("Server was sicked for now...");
     $application->response->send();
