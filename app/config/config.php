@@ -15,9 +15,9 @@ return new Config(
             'controllersDir' => __DIR__ . '/../../app/controllers/',
             'modelsDir'      => __DIR__ . '/../../app/models/',
             'viewsDir'       => __DIR__ . '/../../app/views/',
-            'pluginsDir'     => __DIR__ . '/../../app/plugins/',
-            'libraryDir'     => __DIR__ . '/../../app/library/',
-            'cacheDir'       => __DIR__ . '/../../app/cache/',
+            'librariesDir'     => __DIR__ . '/../../app/libraries/',
+            'cacheDir'       => __DIR__ . '/../../app/storage/cache/',
+            'logDir'         => __DIR__ . '/../../app/storage/logs/',
             'baseUri'        => '/',
         ]
     ]

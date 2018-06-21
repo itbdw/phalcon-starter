@@ -2,9 +2,7 @@
 
 namespace App\Controllers\Admin;
 
-use Phalcon\Mvc\Controller;
-
-class ControllerBase extends Controller
+class ControllerBase extends \App\Controllers\ControllerBase
 {
 
     public function afterExecuteRoute()

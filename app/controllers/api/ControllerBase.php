@@ -2,13 +2,11 @@
 
 namespace App\Controllers\Api;
 
-use Phalcon\Mvc\Controller;
-
-class ControllerBase extends Controller
+class ControllerBase extends \App\Controllers\ControllerBase
 {
 
     public function afterExecuteRoute()
     {
-        $this->view->setViewsDir($this->view->getViewsDir() . 'admin/');
+        $this->view->setViewsDir($this->view->getViewsDir() . 'api/');
     }
 }

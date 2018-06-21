@@ -11,6 +11,7 @@ use Phalcon\Session\Adapter\Files as SessionAdapter;
 
 /**
  * The FactoryDefault Dependency Injector automatically register the right services providing a full stack framework
+ *
  */
 $di = new FactoryDefault();
 
@@ -95,4 +96,9 @@ $di->set('dispatcher', function () {
     $dispatcher->setDefaultNamespace('App\Controllers');
 
     return $dispatcher;
+});
+
+$di->set('logger', function () use ($config) {
+    $logger = new Phalcon\Logger\Adapter\File($config->application->logDir . "".date("Y-m-d") . ".log");
+    return $logger;
 });
