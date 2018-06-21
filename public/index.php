@@ -33,7 +33,10 @@ try {
     echo $application->handle()->getContent();
 } catch (\Exception $e) {
 
-    echo "Something wrong happened, but your data is safe.";
+    $application->response->setStatusCode(503);
+    $application->response->setContent("Server was sicked for now...");
+    $application->response->send();
 
     $application->logger->alert($e->getTraceAsString());
+
 }
