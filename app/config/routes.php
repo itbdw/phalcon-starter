@@ -2,6 +2,12 @@
 
 $router = new Phalcon\Mvc\Router(false);
 
+$router->add('/', [
+    'namespace'  => 'App\Controllers',
+    'controller' => 'index',
+    'action'     => 'index',
+]);
+
 $router->add('/:controller/:action', [
     'namespace'  => 'App\Controllers',
     'controller' => 1,
