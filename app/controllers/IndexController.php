@@ -22,5 +22,14 @@ class IndexController extends ControllerBase
         return $response;
     }
 
+    /**
+     * 
+     */
+    public function p404Action() {
+        $this->response->setStatusCode(404);
+        $this->response->setContent("Url Not Exists");
+        $this->response->send();
+
+    }
 
 }

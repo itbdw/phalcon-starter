@@ -36,4 +36,9 @@ $router->add('/api/:controller', [
 ]);
 
 
+$router->notFound([
+    "controller" => "index",
+    "action" => "p404"
+]);
+
 return $router;
