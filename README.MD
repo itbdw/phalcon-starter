@@ -36,6 +36,7 @@ Transfer rate:          31.48 [Kbytes/sec] received
 看起来phalcon还是比lumen快一下，但是chrome的监控，同一个接口 lumen 30ms，phalcon 180ms
 
 ![img](https://wx2.sinaimg.cn/mw1024/6b94a2e5ly1fskl2aooz4j21kw0be0yr.jpg)
+![img2](https://wx4.sinaimg.cn/mw690/6b94a2e5ly1fskl59i52kj20g00f6jsx.jpg)
 
 # phalcon-starter
 make it more convenient to use phalcon
