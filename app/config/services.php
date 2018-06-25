@@ -4,10 +4,7 @@ use Phalcon\DI\FactoryDefault;
 use Phalcon\Mvc\View;
 use Phalcon\Mvc\Dispatcher;
 use Phalcon\Mvc\Url as UrlResolver;
-use Phalcon\Db\Adapter\Pdo\Mysql as DbAdapter;
 use Phalcon\Mvc\View\Engine\Volt as VoltEngine;
-use Phalcon\Mvc\Model\Metadata\Memory as MetaDataAdapter;
-use Phalcon\Session\Adapter\Files as SessionAdapter;
 
 /**
  * The FactoryDefault Dependency Injector automatically register the right services providing a full stack framework
@@ -64,34 +61,45 @@ $di->setShared('view', function () use ($config) {
  * Database connection is created based in the parameters defined in the configuration file
  */
 $di->set('db', function () use ($config) {
-    return new DbAdapter(
-        [
-            'host'     => $config->database->host,
-            'port'     => $config->database->port,
-            'username' => $config->database->username,
-            'password' => $config->database->password,
-            'dbname'   => $config->database->dbname,
-            'charset'  => $config->database->charset
-        ]
-    );
+
+    $adapter = '\Phalcon\Db\Adapter\Pdo\\'.$config->database->adapter;
+
+    $connection = new $adapter([
+        'host'     => $config->database->host,
+        'port'     => $config->database->port,
+        'username' => $config->database->username,
+        'password' => $config->database->password,
+        'dbname'   => $config->database->dbname,
+        'charset'  => $config->database->charset,
+    ]);
+
+    return $connection;
 });
 
 /**
  * If the configuration specify the use of metadata adapter use it or use memory otherwise
  */
 $di->set('modelsMetadata', function () use ($config) {
-    return new MetaDataAdapter();
+    $metaData = new \Phalcon\Mvc\Model\Metadata\Files(
+          [
+              "metaDataDir" => $config->application->cacheDir,
+          ]
+    );
+
+    return $metaData;
 });
 
-/**
- * Start the session the first time some component request the session service
- */
-$di->set('session', function () {
-    $session = new SessionAdapter();
-    $session->start();
+//
+///**
+// * Start the session the first time some component request the session service
+// */
+//$di->set('session', function () {
+//    $session = new SessionAdapter();
+//    $session->start();
+//
+//    return $session;
+//});
 
-    return $session;
-});
 
 $di->set('dispatcher', function () {
     $dispatcher = new Dispatcher();
@@ -104,3 +112,11 @@ $di->set('logger', function () use ($config) {
     $logger = new Phalcon\Logger\Adapter\File($config->application->logDir . "".date("Y-m-d") . ".log");
     return $logger;
 });
+
+$di->remove('crypt');
+$di->remove('assets');
+$di->remove('flash');
+$di->remove('flashSession');
+
+$di->remove('session');
+$di->remove('sessionBag');
