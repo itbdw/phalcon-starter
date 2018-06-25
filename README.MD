@@ -4,7 +4,7 @@
 
 但是一旦上线上机器，在默认开启 OPcache 的情况下，Lumen 的响应速度比 Phalcon 更好。
 
-phalcon
+线上测试机器ab phalcon
 ```$xslt
 Concurrency Level:      100
 Time taken for tests:   10.135 seconds
@@ -19,7 +19,7 @@ Transfer rate:          48.76 [Kbytes/sec] received
 
 ```
 
-lumen
+线上测试机器ab lumen
 ```$xslt
 Concurrency Level:      100
 Time taken for tests:   14.023 seconds
@@ -33,10 +33,12 @@ Time per request:       7.012 [ms] (mean, across all concurrent requests)
 Transfer rate:          31.48 [Kbytes/sec] received
 ```
 
-看起来phalcon还是比lumen快一下，但是chrome的监控，同一个接口 lumen 30ms，phalcon 180ms
+看起来线上测试机器phalcon还是比lumen快一下，但是chrome的监控，同一个接口 lumen 30ms，phalcon 180ms。
+而本地同样一个接口，lumen 200ms，phalcon 40ms。。。（有点懵逼）
 
 ![img](https://wx2.sinaimg.cn/mw1024/6b94a2e5ly1fskl2aooz4j21kw0be0yr.jpg)
 ![img2](https://wx4.sinaimg.cn/mw690/6b94a2e5ly1fskl59i52kj20g00f6jsx.jpg)
+![img3](https://wx4.sinaimg.cn/mw690/6b94a2e5ly1fsnf1vt87vj20u809gtbe.jpg)
 
 # phalcon-starter
 make it more convenient to use phalcon
