@@ -5,25 +5,28 @@ date_default_timezone_set('PRC');
 
 use Phalcon\Mvc\Application;
 
+define("PS_ROOT_DIR", dirname(__DIR__));
+
 //composer
-require dirname(__DIR__) . '/vendor/autoload.php';
+require PS_ROOT_DIR . '/vendor/autoload.php';
+
 
 try {
 
     /**
      * Read the configuration
      */
-    $config = include __DIR__ . "/../app/config/config.php";
+    $config = include PS_ROOT_DIR . "/app/config/config.php";
 
     /**
      * Read auto-loader
      */
-    include __DIR__ . "/../app/config/loader.php";
+    include PS_ROOT_DIR . "/app/config/loader.php";
 
     /**
      * Read services
      */
-    include __DIR__ . "/../app/config/services.php";
+    include PS_ROOT_DIR . "/app/config/services.php";
 
     /**
      * Handle the request
@@ -31,19 +34,23 @@ try {
     $application = new Application($di);
 
     echo $application->handle()->getContent();
+
 } catch (\Exception $e) {
 
     if ($e instanceof \Phalcon\Mvc\Dispatcher\Exception) {
         $application->response->setStatusCode(404);
-        $application->response->setContent("Url not exists");
+        $application->response->setContent("URI NOT FOUND!");
         $application->response->send();
         return ;
     }
-    
-    $application->response->setStatusCode(503);
-    $application->response->setContent("Server was sicked for now...");
-    $application->response->send();
 
-    $application->logger->alert($e->getTraceAsString());
+    if (EnvParser::getItem('APP_DEBUG')) {
+        dd($e->getTraceAsString());
+    } else {
+        $application->response->setStatusCode(503);
+        $application->response->setContent("SERVER ERROR");
+        $application->response->send();
+    }
 
+    $application->logger->alert(print_r($e->getMessage(), true));
 }
