@@ -2,6 +2,12 @@
 
 $router = new Phalcon\Mvc\Router(false);
 
+//By default the URI information is obtained from the $_GET["_url"] variable, this is passed by the Rewrite-Engine to Phalcon, you can also use $_SERVER["REQUEST_URI"] if required:
+//可以使用传统的 try_files $uri $uri/ /index.php?$query_string;
+$router->setUriSource(
+    \Phalcon\Mvc\Router::URI_SOURCE_SERVER_REQUEST_URI
+);
+
 $router->add('/', [
     'namespace'  => 'App\Controllers',
     'controller' => 'index',
