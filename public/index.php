@@ -33,7 +33,7 @@ try {
      */
     $application = new Application($di);
 
-    echo $application->handle()->getContent();
+    $application->handle()->send();
 
 } catch (\Exception $e) {
 
