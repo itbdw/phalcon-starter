@@ -112,11 +112,3 @@ $di->set('logger', function () use ($config) {
     $logger = new Phalcon\Logger\Adapter\File($config->application->logDir . "".date("Y-m-d") . ".log");
     return $logger;
 });
-
-$di->remove('crypt');
-$di->remove('assets');
-$di->remove('flash');
-$di->remove('flashSession');
-
-$di->remove('session');
-$di->remove('sessionBag');
