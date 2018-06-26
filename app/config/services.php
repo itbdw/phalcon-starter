@@ -89,17 +89,25 @@ $di->set('modelsMetadata', function () use ($config) {
     return $metaData;
 });
 
-//
-///**
-// * Start the session the first time some component request the session service
-// */
-//$di->set('session', function () {
-//    $session = new SessionAdapter();
-//    $session->start();
-//
-//    return $session;
-//});
 
+/**
+* Start the session the first time some component request the session service
+*/
+$di->set('session', function () {
+    $session = new Phalcon\Session\Adapter\Files();
+    $session->start();
+
+   return $session;
+});
+
+$di->set(
+    "cookies",
+    function () {
+        $cookies = new \Phalcon\Http\Response\Cookies();
+        $cookies->useEncryption(false);
+        return $cookies;
+    }
+);
 
 $di->set('dispatcher', function () {
     $dispatcher = new Dispatcher();
