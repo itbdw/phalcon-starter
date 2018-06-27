@@ -71,6 +71,10 @@ $di->set('db', function () use ($config) {
         'password' => $config->database->password,
         'dbname'   => $config->database->dbname,
         'charset'  => $config->database->charset,
+        'options' => [
+            PDO::ATTR_EMULATE_PREPARES => false,
+            PDO::ATTR_STRINGIFY_FETCHES => false
+        ]
     ]);
 
     return $connection;
