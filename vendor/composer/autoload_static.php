@@ -7,12 +7,34 @@ namespace Composer\Autoload;
 class ComposerStaticInit8180f51c1849cc5059d49c7820535ff5
 {
     public static $files = array (
-        '5b0716b6df725d25312c55716b23362c' => __DIR__ . '/..' . '/phalcon/dd/src/helper.php',
+        '0e6d7bf4a5811bfa5cf40c5ccd6fae6a' => __DIR__ . '/..' . '/symfony/polyfill-mbstring/bootstrap.php',
+        '667aeda72477189d0494fecd327c3641' => __DIR__ . '/..' . '/symfony/var-dumper/Resources/functions/dump.php',
+    );
+
+    public static $prefixLengthsPsr4 = array (
+        'S' => 
+        array (
+            'Symfony\\Polyfill\\Mbstring\\' => 26,
+            'Symfony\\Component\\VarDumper\\' => 28,
+        ),
+    );
+
+    public static $prefixDirsPsr4 = array (
+        'Symfony\\Polyfill\\Mbstring\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/symfony/polyfill-mbstring',
+        ),
+        'Symfony\\Component\\VarDumper\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/symfony/var-dumper',
+        ),
     );
 
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
+            $loader->prefixLengthsPsr4 = ComposerStaticInit8180f51c1849cc5059d49c7820535ff5::$prefixLengthsPsr4;
+            $loader->prefixDirsPsr4 = ComposerStaticInit8180f51c1849cc5059d49c7820535ff5::$prefixDirsPsr4;
 
         }, null, ClassLoader::class);
     }

@@ -45,12 +45,14 @@ try {
     }
 
     if (EnvParser::getItem('APP_DEBUG')) {
-        dd($e->getTraceAsString());
+
+        dump([$e->getCode(), $e->getMessage(), $e->getFile(), $e->getLine()]);
     } else {
         $application->response->setStatusCode(503);
         $application->response->setContent("SERVER ERROR");
         $application->response->send();
     }
 
-    $application->logger->alert(print_r($e->getMessage(), true));
+    $application->logger->alert(implode(" ", [$e->getCode(), $e->getMessage(), $e->getFile(), $e->getLine()]));
 }
+

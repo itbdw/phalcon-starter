@@ -16,7 +16,6 @@ class IndexController extends ControllerBase
 
     public function indexAction()
     {
-
         $response = new Response();
         $response->setJsonContent(["hello"]);
         return $response;
