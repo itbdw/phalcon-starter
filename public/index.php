@@ -45,8 +45,7 @@ try {
     }
 
     if (EnvParser::getItem('APP_DEBUG')) {
-
-        dump([$e->getCode(), $e->getMessage(), $e->getFile(), $e->getLine()]);
+        dump($e);die(1);
     } else {
         $application->response->setStatusCode(503);
         $application->response->setContent("SERVER ERROR");
